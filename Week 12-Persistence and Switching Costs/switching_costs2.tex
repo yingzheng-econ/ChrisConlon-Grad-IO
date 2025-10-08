@@ -244,7 +244,7 @@ utilization in less comprehensive plans.
 Use what Einav, Finkelstein, and Levin (2010) call a ``realized'' empirical utility model and assume that $U_{kjt}$ has the following von-Neuman Morgenstern (v-NM) expected utility formulation
 \begin{align*}
 U_{k j t}&=\int_{0}^{\infty}  u_{k}\left(W_{k}, O O P, P_{k j t}, 1_{k j, t-1}\right) f_{k j t}(O O P) d O O P\\
-u_{k}(x)&=-\frac{1}{\gamma_{k}\left(\mathbf{X}_{k}^{A}\right)} e^{-\gamma_{k}\left(\mathbf{x}_{k}^{A}\right)_{x}}
+u_{k}(x)&=-\frac{1}{\gamma_{k}\left(\symbf{X}_{k}^{A}\right)} e^{-\gamma_{k}\left(\symbf{x}_{k}^{A}\right)_{x}}
 \end{align*}
 \begin{itemize}
 \item $k$ is a family unit,  $j$ is an insurance plan,  $t$ is a year $(t_0,t_1,t_2)$.
@@ -255,13 +255,13 @@ u_{k}(x)&=-\frac{1}{\gamma_{k}\left(\mathbf{X}_{k}^{A}\right)} e^{-\gamma_{k}\le
 
 \begin{frame}{Handel: Demand Model}
 \begin{align*}
-x &=W_{k}-P_{k j t}-O O P+\eta\left(\mathbf{X}_{k t}^{B}, Y_{k}\right) 1_{k j, t-1}+\delta_{k}\left(Y_{k}\right) 1_{1200}+\alpha H_{k, t-1} 1_{250}+\epsilon_{k j t}\left(Y_{k}\right)
+x &=W_{k}-P_{k j t}-O O P+\eta\left(\symbf{X}_{k t}^{B}, Y_{k}\right) 1_{k j, t-1}+\delta_{k}\left(Y_{k}\right) 1_{1200}+\alpha H_{k, t-1} 1_{250}+\epsilon_{k j t}\left(Y_{k}\right)
 \end{align*}
 \begin{itemize}
 \item $W_k$ family wealth.
 \item $P_{k j t}$ is the price for insurance plan $j$ to family $k$.
 \item $OOP$ is a draw from the distribution of $f(OOP)$ expenses: depends on the plan.
-\item $\eta\left(\mathbf{X}_{k t}^{B}, Y_{k}\right) 1_{k j, t-1}$ is the switching cost which depends on demographics $\mathbf{X}_{k t}^{B}$.
+\item $\eta\left(\symbf{X}_{k t}^{B}, Y_{k}\right) 1_{k j, t-1}$ is the switching cost which depends on demographics $\symbf{X}_{k t}^{B}$.
 \item $\delta_{k}(Y_k)$ is the family specific intercept for high-deductible plan $(Y_k)$ is family dummy.
 \item $\alpha H_{k, t-1} 1_{250}$ is interaction between 90th percentile spenders and most generous plan.
 \end{itemize}

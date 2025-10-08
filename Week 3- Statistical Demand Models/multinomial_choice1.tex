@@ -1,10 +1,12 @@
-\input{../resources/preamble}
-\begin{document}
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage{teaching_slides}
+
 \title{Multinomial Discrete Choice: IIA Logit}
 \author{Chris Conlon}
 \institute{Grad IO}
-\date{\today}
+\date{Fall 2025}
 
+\begin{document}
 \frame{\titlepage}
 
 
@@ -25,10 +27,10 @@ Most decisions agents make are not necessarily binary:
 We consider a \alert{multinomial discrete choice}:
 \begin{itemize}
 \item in period $t$
-\item with $\mathcal{J}_t$ alternatives.
+\item with $\calJ_t$ alternatives.
 \item subscript individual agents by $i$.
-\item agents choose $j \in J_t$ with probability $S_{ijt}$.
-\item Agent $i$ receives utility $U_{ij}$ for choosing $j$.
+\item agents choose $j \in J_t$ with probability $s_{ijt}$.
+\item Agent $i$ receives utility $U_{ijt}$ for choosing $j$.
 \item Choice is exhaustive and mutually exclusive.
  \end{itemize}\pause
 Consider the simple example $(t=1)$:
@@ -46,30 +48,30 @@ s_{ij} &=& \Pr( U_{ij} > U_{ik} \quad \forall k \neq j)\\
  &=& \Pr( \varepsilon_{ij}-\varepsilon_{ik} > V_{ik} - V_{ij} \quad \forall k \neq j)
 \end{eqnarray*}
 \pause
-It is helpful to define $f(\varepsilon_{i})$ as the $J$ vector of individual $i$'s unobserved utility.
+It is helpful to define $f(\symbf{\varepsilon_{i}})$ as the $J$ vector of individual $i$'s unobserved utility.
 \begin{eqnarray*}
 s_{ij} &=& \Pr( \varepsilon_{ij}-\varepsilon_{ik} > V_{ik} - V_{ij} \quad \forall k \neq j)\\
-&=& \int I( \varepsilon_{ij}-\varepsilon_{ik} > V_{ik} - V_{ij} ) f( \varepsilon_i) \partial \varepsilon_i \\
+&=& \int I( \varepsilon_{ij}-\varepsilon_{ik} > V_{ik} - V_{ij} ) f( \symbf{\varepsilon_i}) \partial \symbf{\varepsilon_i} \\
 \end{eqnarray*}
 \end{frame}
 
 \begin{frame}
 \frametitle{Nonparametric Setup}
-In order to compute the choice probabilities, we must perform a $J$ dimensional integral over $f(\varepsilon_i)$.
+In order to compute the choice probabilities, we must perform a $J$ dimensional integral over $f(\symbf{\varepsilon_i})$.
 \begin{align*}
-s_{ij} =  \int I( \varepsilon_{ij}-\varepsilon_{ik} > V_{ik} - V_{ij} ) f( \varepsilon_i) \partial \varepsilon_i
+s_{ij} =  \int I( \varepsilon_{ij}-\varepsilon_{ik} > V_{ik} - V_{ij} ) f(\symbf{\varepsilon_i}) \partial \symbf{\varepsilon_i}
 \end{align*}
 There are some choices that make our life easier
 \begin{itemize}
-\item Multivariate normal: $\varepsilon_i  \sim N(0,\Omega)$. $\longrightarrow$ \alert{ multinomial probit}.
-\item Gumbel/Type 1 EV: $f(\varepsilon_i) = e^{-\varepsilon_{ij}}  e^{-e^{-\varepsilon_{ij}}}  $ and $F(\varepsilon_i) = 1- e^{-e^{-\varepsilon_{ij}}}$ $\longrightarrow$ \alert{multinomial logit}
+\item Multivariate normal: $\symbf{\varepsilon_i} \sim N(0,\Omega)$. $\longrightarrow$ \alert{ multinomial probit}.
+\item Gumbel/Type 1 EV: $f(\symbf{\varepsilon_i}) = e^{-\varepsilon_{ij}}  e^{-e^{-\varepsilon_{ij}}}  $ and $F(\symbf{\varepsilon_i}) = 1- e^{-e^{-\varepsilon_{ij}}}$ $\longrightarrow$ \alert{multinomial logit}
 \item There are also heteroskedastic variants of the Type I EV/ Logit framework.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Errors}
-Allowing for full support $(-\infty, \infty)$ errors provide two key features:
+Allowing for a continuous density with full support $(-\infty, \infty)$ errors provide two key features:
 \begin{itemize}
 \item Smoothness: $s_{ij}$ is everywhere continuously differentiable in $V_{ij}$.
 \item Bound $s_{ij} \in (0,1)$ so that we can rationalize any observed pattern in the data.
@@ -105,9 +107,9 @@ U_c &= v_{c} + \theta y_i  + \varepsilon_c
 \begin{frame}
 \frametitle{Basic Identification: Location}
 \begin{itemize}
-\item Technically we can't really fully specify $f(\varepsilon_i)$ since we can always re-normalize: $\widetilde{\varepsilon_{ijk}} = \varepsilon_{ij} - \varepsilon_{ik}$ and write $g(\widetilde{\varepsilon_{ik}})$. Thus any $g(\widetilde{\varepsilon_{ik}})$ is consistent with infinitely many $f(\varepsilon_i)$.
-\item Logit pins down $f(\varepsilon_i)$ sufficiently with parametric restrictions.
-\item Probit does not. We must generally normalize one dimension of $f(\varepsilon_i)$ in the probit model. Usually a diagonal term of $\Omega$ so that $\omega_{11} =1$ for example. (Actually we need to do more!).
+\item Technically we can't really fully specify $f(\symbf{\varepsilon_i})$ since we can always re-normalize: $\widetilde{\varepsilon_{ijk}} = \varepsilon_{ij} - \varepsilon_{ik}$ and write $g(\widetilde{\symbf{\varepsilon_{ik}}})$. Thus any $g(\widetilde{\symbf{\varepsilon_{ik}}})$ is consistent with infinitely many $f(\symbf{\varepsilon_i})$.
+\item Logit pins down $f(\symbf{\varepsilon_i})$ sufficiently with parametric restrictions.
+\item Probit does not. We must generally normalize one dimension of $f(\symbf{\varepsilon_i})$ in the probit model. Usually a diagonal term of $\Omega$ so that $\omega_{11} =1$ for example. (Actually we need to do more!).
 \end{itemize}
 \end{frame}
 
@@ -147,7 +149,7 @@ U_{ic} &=& v_{ic}+ \varepsilon_{ic}
 \frametitle{Deeper Identification Results}
 Different ways to look at identification
 \begin{itemize}
-\item Are we interested in non-parametric identification of $V_{ij}$, specifying $f(\varepsilon_i)$?
+\item Are we interested in non-parametric identification of $V_{ij}$, specifying $f(\symbf{\varepsilon_i})$?
 \item Or are we interested in non-parametric identification of $U_{ij}$. (Generally hard).
 \begin{itemize}
 \item Generally we require a large support (special-regressor) or ``completeness'' condition.
@@ -177,7 +179,7 @@ s_{ij} = \frac{e^{V_{ij}}}{\sum_k e^{V_{ik}}}
 \end{eqnarray*}
 Logit Inclusive Value is helpful for several reasons
 \begin{itemize}
-\item Expected utility of best option (without knowledge of $\varepsilon_i$) does not depend on $\epsilon_{ij}$.
+\item Expected utility of best option (without knowledge of $\symbf{\varepsilon_i}$) does not depend on $\varepsilon_{ij}$.
 \item This is a globally concave function in $V_{ij}$ (more on that later).
 \item Allows simple computation of $\Delta CS$ for consumer welfare (but not $CS$ itself).
 \end{itemize}
@@ -219,7 +221,7 @@ What is actually identified here?
 \begin{itemize}
 \item Helpful to look at the ratio of two choice probabilities
 \begin{align*}
-\frac{s_{ij}(\theta)}{s_{ik}(\theta)}  = \frac{e^{V_ij}}{e^{V_{ik}}} = e^{V_{ij} - V_{ik}}
+\frac{s_{ij}(\theta)}{s_{ik}(\theta)}  = \frac{e^{V_{ij}}}{e^{V_{ik}}} = e^{V_{ij} - V_{ik}}
 \end{align*}
 \item We only identify the \alert{difference in indirect utilities} not the levels.
 \item The ratio of choice probabilities for $j$ and $k$ depends only on $j$ and $k$ and not on any alternative $l$, this is known as \alert{independence of irrelevant alternatives}.
@@ -232,7 +234,7 @@ What is actually identified here?
 \frametitle{Multinomial Logit: Identification}
 As another idea suppose we add a constant $C$ to each $\beta_j$.
 \begin{eqnarray*}
-s_{ij} = \frac{\exp[\mathbf{x_i} (\beta_j+C) ]}{\sum_k \exp[\mathbf{x_i} (\beta_k+C) ]} =  \frac{\exp[\mathbf{x_i} C] \exp[\mathbf{x_i} \beta_j ]}{\exp[\mathbf{x_i} C] \sum_k \exp[\mathbf{x_i} \beta_k ]}
+s_{ij} = \frac{\exp[\symbf{x_i} (\beta_j+C) ]}{\sum_k \exp[\symbf{x_i} (\beta_k+C) ]} =  \frac{\exp[\symbf{x_i} C] \exp[\symbf{x_i} \beta_j ]}{\exp[\symbf{x_i} C] \sum_k \exp[\symbf{x_i} \beta_k ]}
 \end{eqnarray*}
 This has no effect.  That means we need to fix a normalization $C$.\\
  The most convenient is generally that $C = - \beta_K$.
@@ -295,10 +297,10 @@ The well known critique:
 \begin{frame}{IIA Property}
 \begin{itemize}
 \item IIA implies that we can obtain consistent estimates for $\beta$ on any subset of alternatives.
-\item This means instead of using all $\mathcal{J}$ alternatives in the choice set, we could estimate on some subset $\mathcal{S} \subset \mathcal{J}$.
+\item This means instead of using all $\calJ$ alternatives in the choice set, we could estimate on some subset $\calS \subset \calJ$.
 \item This used to be a way to reduce the computational burden of estimation (not clear this is an issue in 21st century).
-\item Sometimes we have \alert{choice based samples} where we oversample people who choose a particular alternative. Manski and Lerman (1977) show we can get consistent estimates for all but the ASC. This requires knowledge of the difference between the true rate $A_j$ and the choice-based sample rate $\mathcal{S}_j$.
-\item Hausman proposes a specification test of the logit model: estimate on the full dataset to get $\hat{\beta}$, construct a smaller subsample $\mathcal{S}^k \subset \mathcal{J}$ and $\hat{\beta^k}$ for one or more subsets $k$. If $|\hat{\beta}^k - \hat{\beta}|$ is small enough.
+\item Sometimes we have \alert{choice based samples} where we oversample people who choose a particular alternative. Manski and Lerman (1977) show we can get consistent estimates for all but the ASC. This requires knowledge of the difference between the true rate $A_j$ and the choice-based sample rate $\calS_j$.
+\item Hausman proposes a specification test of the logit model: estimate on the full dataset to get $\hat{\beta}$, construct a smaller subsample $\calS^k \subset \calJ$ and $\hat{\beta^k}$ for one or more subsets $k$. If $|\hat{\beta}^k - \hat{\beta}|$ is small enough.
 \end{itemize}
 \end{frame}
 
@@ -345,11 +347,11 @@ Cross elasticity doesn't really depend on $j$.
 \begin{frame}{Diversion Ratios}
 Recall the diversion ratio:
 \begin{align*}
-D_{jk} =\frac{\frac{\partial s_{ik}}{\partial p_{ij}}}{\left |\frac{\partial s_{ij}}{\partial p_{ij}} \right|} = \frac{\beta_p s_{ik} s_{ij}}{\beta_p s_{ij} (1-s_{ij})} = \frac{s_{ik}}{1-s_{ij}}
+D_{jk} =\frac{\frac{\partial s_{ik}}{\partial p_{j}}}{\left |\frac{\partial s_{ij}}{\partial p_{j}} \right|} = \frac{\beta_p s_{ik} s_{ij}}{\beta_p s_{ij} (1-s_{ij})} = \frac{s_{ik}}{1-s_{ij}}
 \end{align*}
 \begin{itemize}
 \item Again proportional substitution. As price of $j$ goes up we proportionally inflate choice probabilities of substitutes.
-\item Likewise removing an option $j$ means that $\tilde{s}_{ik}(\mathcal{J} \setminus j) = \frac{s_{ik}}{1-s_{ij}}$ for all other $k$.
+\item Likewise removing an option $j$ means that $\tilde{s}_{ik}(\calJ \setminus j) = \frac{s_{ik}}{1-s_{ij}}$ for all other $k$.
 \item IIA/Logit means \alert{constant diversion ratios}.
 \end{itemize}
 \end{frame}
@@ -373,9 +375,9 @@ D_{jk} =\frac{\frac{\partial s_{ik}}{\partial p_{ij}}}{\left |\frac{\partial s_{
 %\frametitle{Multinomial Logit: Estimation with Individual Data}
 %Estimation is straightforward via Maximum Likelihood (MLE):
 %\begin{eqnarray*}
-%L(\mathbf{y} | \mathbf{x}, \theta) &=& \prod_{i=1}^N  \underbrace{\frac{n_i!}{\prod_{j=1}^J y_{ij}!}}_{C(\mathbf{y})} \prod_{j=1}^J  s_{ij}(x_{ij},\theta)^{y_{ij}} \\
-%ll(\mathbf{y} | \mathbf{x}, \theta) &=& \sum_{i=1}^N \log(C(\mathbf{y}))   + \sum_{i=1}^N \sum_{j=1}^J y_{ij} \log( s_{ij}(x_{ij},\theta)) \\
-%l(\mathbf{y} | \mathbf{x}, \theta) &\approx& \sum_{i=1}^N \sum_{j=1}^J y_{ij} \log( s_{ij}(x_{ij},\theta))
+%L(\symbf{y} | \symbf{x}, \theta) &=& \prod_{i=1}^N  \underbrace{\frac{n_i!}{\prod_{j=1}^J y_{ij}!}}_{C(\symbf{y})} \prod_{j=1}^J  s_{ij}(x_{ij},\theta)^{y_{ij}} \\
+%ll(\symbf{y} | \symbf{x}, \theta) &=& \sum_{i=1}^N \log(C(\symbf{y}))   + \sum_{i=1}^N \sum_{j=1}^J y_{ij} \log( s_{ij}(x_{ij},\theta)) \\
+%l(\symbf{y} | \symbf{x}, \theta) &\approx& \sum_{i=1}^N \sum_{j=1}^J y_{ij} \log( s_{ij}(x_{ij},\theta))
 %\end{eqnarray*}
 %\begin{itemize}
 %\item We can ignore the combinatorial term (with the factorials) since it does not affect the location of the maximum (it is additive and doesn't depend on $\theta$).
@@ -388,10 +390,10 @@ D_{jk} =\frac{\frac{\partial s_{ik}}{\partial p_{ij}}}{\left |\frac{\partial s_{
 %\begin{itemize}
 %\item Let's look a little more closely at what's going on:
 %\begin{eqnarray*}
-%\sum_{i=1}^N \sum_{j=1}^J  y_{ij} \left[ x_{ij} \beta - \underbrace{\log \left(\sum_{k=1}^K x_{ik} \beta  \right)}_{IV_i(\mathbf{x_i},\theta)} \right]
+%\sum_{i=1}^N \sum_{j=1}^J  y_{ij} \left[ x_{ij} \beta - \underbrace{\log \left(\sum_{k=1}^K x_{ik} \beta  \right)}_{IV_i(\symbf{x_i},\theta)} \right]
 %\end{eqnarray*}
 %\item We call the term on the right the \alert{logit inclusive value}. It does not depend on $k$ but might vary across choice situations/individuals $i$.
-%\item The point of the inclusive value is to guarantee that $\sum_{k=1} s_{ik}(\mathbf{x_i},\theta) = 1$.
+%\item The point of the inclusive value is to guarantee that $\sum_{k=1} s_{ik}(\symbf{x_i},\theta) = 1$.
 %\item If we somehow observed $IV_i(\theta)$ we could just do linear regression (in fact we could do this separately for each $K$).
 %\end{itemize}
 %\end{frame}
@@ -404,7 +406,7 @@ D_{jk} =\frac{\frac{\partial s_{ik}}{\partial p_{ij}}}{\left |\frac{\partial s_{
 %\item  Suppose that all consumers had the same $x_{ij} = x_{j}$ (Choices depended only on products not on income, education, etc.)
 %\item We can construct $y_{j}^* = \sum_{i=1}^N y_{ij}$.
 %\begin{eqnarray*}
-%l(\mathbf{y} | \mathbf{x}, \theta) &\approx& \sum_{j=1}^J  y_{j}^{*} \log( s_{j}(\mathbf{x},\theta))
+%l(\symbf{y} | \symbf{x}, \theta) &\approx& \sum_{j=1}^J  y_{j}^{*} \log( s_{j}(\symbf{x},\theta))
 %\end{eqnarray*}
 %\item When each consumer $i$ faces the same choice environment, we can aggregate data into \alert{sufficient statistics}.
 %\end{itemize}
@@ -417,9 +419,9 @@ D_{jk} =\frac{\frac{\partial s_{ik}}{\partial p_{ij}}}{\left |\frac{\partial s_{
 %\begin{itemize}
 %\item Instead of individual data, or a single group we might have multiple groups: if prices only change once per week, we can aggregate all of the week's sales into one ``observation''.
 %\item Likewise if we only observe that an individual is within one of five income buckets -- there is no loss from aggregating our data into these five buckets.
-%\item All of this depends on the precise form of $ s_{j}(\mathbf{x_i},\theta)$. When it doesn't change across observations: we can aggregate.
+%\item All of this depends on the precise form of $ s_{j}(\symbf{x_i},\theta)$. When it doesn't change across observations: we can aggregate.
 %\item It functions as if we have a representative consumer up to $\varepsilon_{i}$.
-%\item We can use this idea to go from individual level to market demand: $q_j(\mathbf{x_i}) = N_i s_{ij}(\theta)$.
+%\item We can use this idea to go from individual level to market demand: $q_j(\symbf{x_i}) = N_i s_{ij}(\theta)$.
 %\end{itemize}
 %\end{frame}
 
